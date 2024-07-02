@@ -1,14 +1,158 @@
-\documentclass{article}
+\documentclass{report}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 
-\title{My First LaTeX Document}
-\author{John Doe}
+% Define colors for syntax highlighting
+\lstset{
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{green},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true
+}
+
+\title{App to Detect Siren Installation Guide}
+\author{Ahmed}
 \date{\today}
 
 \begin{document}
 
 \maketitle
 
-\section{Introduction}
-This is the first paragraph of my first LaTeX document. LaTeX is a powerful typesetting system that is widely used for producing scientific and mathematical documents due to its high quality of typesetting.
+\tableofcontents
+
+\chapter{Introduction}
+This report provides a step-by-step guide to setting up an application to detect sirens. The guide is divided into two parts: installation of necessary software and creating a standalone app.
+
+\chapter{Part One: Installation Steps}
+
+\section{Step 1: Download Miniforge}
+To begin, download Miniforge using the `wget` command.
+
+\begin{lstlisting}[language=bash]
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh
+\end{lstlisting}
+
+\section{Step 2: Install Miniforge}
+Run the downloaded script to install Miniforge.
+
+\begin{lstlisting}[language=bash]
+bash Miniforge3-Linux-aarch64.sh
+\end{lstlisting}
+
+\section{Step 3: Initialize Environment}
+Source your bash profile to initialize the environment.
+
+\begin{lstlisting}[language=bash]
+source ~/.bashrc
+\end{lstlisting}
+
+\section{Step 4: Verify Installations}
+Check the installed versions of Conda and Python.
+
+\begin{lstlisting}[language=bash]
+conda --version
+python --version
+\end{lstlisting}
+
+\section{Step 5: Create Conda Environment}
+Create a new Conda environment with Python 3.8.
+
+\begin{lstlisting}[language=bash]
+conda create -n eva python=3.8
+\end{lstlisting}
+
+\section{Step 6: Activate Conda Environment}
+Activate the newly created environment.
+
+\begin{lstlisting}[language=bash]
+conda activate eva
+\end{lstlisting}
+
+\section{Step 7: Clone Git Repository}
+Navigate to your home directory and clone the project repository.
+
+\begin{lstlisting}[language=bash]
+cd ~
+git clone https://github.com/adilonam/Driver-Alert.git
+\end{lstlisting}
+
+\section{Step 8: Update System Packages}
+Update your system's package list to ensure all packages are up to date.
+
+\begin{lstlisting}[language=bash]
+sudo apt update
+\end{lstlisting}
+
+\section{Step 9: Install Dependencies}
+Install additional required libraries.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install libhdf5-dev
+\end{lstlisting}
+
+\section{Step 10: Install Python Requirements}
+Navigate to the project directory and install the required Python packages.
+
+\begin{lstlisting}[language=bash]
+cd ~/Driver-Alert
+python -m pip install -r requirements.txt
+\end{lstlisting}
+
+\section{Step 11: Create local variable environment}
+
+\begin{lstlisting}[language=bash]
+cd ~/Driver-Alert
+cp .env.example .env
+\end{lstlisting}
+
+\section{Step 12: Run the Application}
+Finally, run the application using Uvicorn.
+
+\begin{lstlisting}[language=bash]
+python -m uvicorn main:app --host 0.0.0.0
+\end{lstlisting}
+
+\chapter{Part Two: Creating a Standalone App}
+
+\section{Step 1: Make the Script Executable}
+Navigate to the Driver-Alert repository an
+\begin{lstlisting}[language=bash]
+cd ~/Driver-Alert
+chmod +x create_service.sh
+\end{lstlisting}
+
+\section{Step 2: Execute the Script}
+Run the script to create the standalone app. The script will prompt you for two paths.
+
+\begin{lstlisting}[language=bash]
+./create_service.sh
+\end{lstlisting}
+
+When prompted by the script, provide the following paths:
+
+\begin{lstlisting}[language=bash]
+Enter the path to the Python executable: /path/to/python
+Enter the path to the Driver-Alert repository: /path/to/Driver-Alert
+\end{lstlisting}
+
+Make sure to replace `/path/to/python` and `/path/to/Driver-Alert` with the actual paths on your system.
+
+\section{Step 3: Reboot and enjoy}
+
+\chapter{Conclusion}
+This guide has covered the necessary steps to download, install, and set up the application to detect sirens, as well as creating a standalone app. If you encounter any
+issues, refer to the project's documentation for further assistance.
+
+
+\chapter{References}
+\begin{itemize}
+\item \href{https://github.com/conda-forge/miniforge}{Miniforge GitHub Repository}
+\item \href{https://github.com/adilonam/Driver-Alert}{Driver-Alert GitHub Repository}
+\end{itemize}
 
 \end{document}
